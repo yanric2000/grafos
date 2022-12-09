@@ -93,13 +93,7 @@ public class MatrizAdjacencia {
         return menorQuantidadePercorrida[destino];
     }
 
-    /**
-    * Busca todos os caminhos entre dois dados estados
-    * @param origem
-    * @param destino
-    */
     public static void encontrarTodosOsCaminhos(int origem, int destino, int[][] matrizAdjacencia, String[] estados) {
-        
         // pilha para armazenar os estados que serão visitados
         Stack<Integer> stack = new Stack<>();
         
@@ -107,9 +101,9 @@ public class MatrizAdjacencia {
         
         // marca o estado inicial como visitado
         boolean[] visitados = new boolean[matrizAdjacencia.length];
-        visitados[origem] = true;
+        visitados[destino] = true;
         
-        stack.push(origem);
+        stack.push(destino);
 
         while (!stack.isEmpty()) {
             int estado = stack.pop();
@@ -120,14 +114,16 @@ public class MatrizAdjacencia {
                     stack.push(i);
                     caminho[i] = estado;
                     
-                    if (i == destino) {
+                    if (i == origem) {
                         System.out.print("Caminho possível: ");
-                        estado = destino;
-                        while (estado != origem) {
+                        estado = origem;
+
+                        while (estado != destino) {
                             System.out.print(estados[estado] + " -> ");
                             estado = caminho[estado];
                         }
-                        System.out.println(estados[origem]);
+
+                        System.out.println(estados[destino]);
                         
                         // volta ao estado anterior e continua a busca
                         stack.pop();
@@ -372,12 +368,13 @@ public class MatrizAdjacencia {
 
         String verticeMaiorGrau = obtemVerticeMaiorGrau(grafo, vertices);
         int maiorGrau = obtemGrau(grafo, vertices, verticeMaiorGrau);
-        
 
         String verticeMenorGrau = obtemVerticeMenorGrau(grafo, vertices);
         int menorGrau = obtemGrau(grafo, vertices, verticeMenorGrau);
         
+
         System.out.println("");
+        System.out.println("##############################");
         System.out.println("");
 
         System.out.println("Vértice com maior grau: " + verticeMaiorGrau);
@@ -395,20 +392,19 @@ public class MatrizAdjacencia {
         System.out.println("");
 
         int saoPaulo = 3;
-        int santaCatarina = 1;
+        int pernambuco = 14;
 
-        int menorQuantidadePercorrida = deParaMenorCaminho(saoPaulo, santaCatarina , grafo, vertices.length, vertices);
+        int menorQuantidadePercorrida = deParaMenorCaminho(saoPaulo, pernambuco , grafo, vertices.length, vertices);
 
-        System.out.println("De " + vertices[saoPaulo] + " para " + vertices[santaCatarina] + " a distância é de " + menorQuantidadePercorrida + " estado(s)");
+        System.out.println("De " + vertices[saoPaulo] + " para " + vertices[pernambuco] + " a distância é de " + menorQuantidadePercorrida + " estado(s)");
 
         System.out.println("");
         System.out.println("##############################");
         System.out.println("");
 
 
-        encontrarTodosOsCaminhos(saoPaulo, santaCatarina, grafo, vertices);
+        encontrarTodosOsCaminhos(saoPaulo, pernambuco, grafo, vertices);
 
         System.out.println("");
-
     }
 }
