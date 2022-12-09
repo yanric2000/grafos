@@ -93,7 +93,7 @@ public class MatrizAdjacencia {
         return menorQuantidadePercorrida[destino];
     }
 
-    public static void encontrarTodosOsCaminhos(int origem, int destino, int[][] matrizAdjacencia, String[] estados) {
+    public static void encontrarCaminhosPossiveisSemRepetir(int origem, int destino, int[][] matrizAdjacencia, String[] estados) {
         // pilha para armazenar os estados que serão visitados
         Stack<Integer> stack = new Stack<>();
         
@@ -391,19 +391,22 @@ public class MatrizAdjacencia {
         System.out.println("##############################");
         System.out.println("");
 
-        int saoPaulo = 3;
-        int pernambuco = 14;
+        int origem = 3;
+        int destino = 14;
 
-        int menorQuantidadePercorrida = deParaMenorCaminho(saoPaulo, pernambuco , grafo, vertices.length, vertices);
+        int menorQuantidadePercorrida = deParaMenorCaminho(origem, destino , grafo, vertices.length, vertices);
 
-        System.out.println("De " + vertices[saoPaulo] + " para " + vertices[pernambuco] + " a distância é de " + menorQuantidadePercorrida + " estado(s)");
+        System.out.println("De " + vertices[origem] + " para " + vertices[destino] + " a distância é de " + menorQuantidadePercorrida + " estado(s)");
 
         System.out.println("");
         System.out.println("##############################");
         System.out.println("");
 
 
-        encontrarTodosOsCaminhos(saoPaulo, pernambuco, grafo, vertices);
+        System.out.println("Caminhos possíveis sem repetir de " + vertices[origem] + " para " + vertices[destino] + ":");
+        System.out.println("");
+
+        encontrarCaminhosPossiveisSemRepetir(origem, destino, grafo, vertices);
 
         System.out.println("");
     }
